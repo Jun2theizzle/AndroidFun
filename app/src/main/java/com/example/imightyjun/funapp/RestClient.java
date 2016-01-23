@@ -1,35 +1,54 @@
 package com.example.imightyjun.funapp;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 /**
  * Created by iMightyJun on 12/28/15.
  */
-public class RestClient {
-    private HttpURLConnection connection = null;
-    public String GET() {
+@SuppressWarnings("deprecation")
+public class RestClient implements Closeable {
+    private DefaultHttpClient httpClient = new DefaultHttpClient();
+    public RestClient() {
+
+    }
+
+    public String GET() throws Exception{
         try {
-            URL url = new URL("https://httpbin.org/get");
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
-
-            int responseCode = connection.getResponseCode();
-            if(responseCode != 200) {
-                throw new HttpException("Error : GET request");
+            HttpGet httpGet = new HttpGet("http://httpbin.org/get");
+            httpGet.addHeader("accept", "application/json");
+            HttpResponse response = httpClient.execute(httpGet);
+            if (response.getStatusLine().getStatusCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code :" + response.getStatusLine().getStatusCode());
             }
+            BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            String output;
+            StringBuilder sb = new StringBuilder();
+            while((output = br.readLine()) != null)
+                sb.append(output + "\n");
+            br.close();
 
-            connection.getContent();
-
+            return sb.toString();
         }
         catch(Exception ex)
         {
             ex.printStackTrace();
-            return ex.getMessage();
+            throw ex;
         }
-
-        return "";
     }
+
+    @Override
+    public void close() throws IOException {
+        httpClient.getConnectionManager().shutdown();
+    }
+
 
 }
