@@ -1,6 +1,7 @@
 package com.example.imightyjun.funapp;
 
 import android.app.AlertDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,21 +21,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("HTTP CLIENT", "CLIENT STARTS");
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try(RestClient client = new RestClient()) {
-                            Log.d("HTTP RESPONSE", client.GET());
-                        }
-                        catch(Exception ex)
-                        {
-                            ex.printStackTrace();
-                        }
-                    }
-                }).start();
+                try {
+                    new RestClient(new RestClient.AsyncResponse() {
+                        @Override
+                        public void processFinish(String output) {
+                            Log.d("HTTP RESPONSE :", output);
+                            alertDialog.setMessage(output);
+                            alertDialog.show();
 
+                        }
+                    }).execute();
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }
                 //alertDialog.setMessage(response);
-                alertDialog.show();
 
             }
         });
