@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    ParseMangaTown();
+                    new MangaParser().execute();
                 }
                 catch(Exception ex){
                     ex.printStackTrace();
@@ -61,12 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void ParseMangaTown() throws Exception{
-        Document document = Jsoup.connect("http://www.mangatown.com/").get();
-        Elements elements = document.select(".cartoon-list");
-        Log.d("MANGATOWN",Integer.toString(elements.size()));
-
-    }
 
 
 }
