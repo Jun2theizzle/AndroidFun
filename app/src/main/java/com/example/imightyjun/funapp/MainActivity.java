@@ -8,6 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("HTTP RESPONSE :", output);
                             alertDialog.setMessage(output);
                             alertDialog.show();
-
                         }
-                    }).execute();
+                    }).execute(new HttpPayload());
                 }
                 catch(Exception ex)
                 {
@@ -41,6 +44,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button mangaButton = (Button) findViewById(R.id.mangaBtn);
+        mangaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    ParseMangaTown();
+                }
+                catch(Exception ex){
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
+
+    }
+
+    private void ParseMangaTown() throws Exception{
+        Document document = Jsoup.connect("http://www.mangatown.com/").get();
+        Elements elements = document.select(".cartoon-list");
+        Log.d("MANGATOWN",Integer.toString(elements.size()));
 
     }
 

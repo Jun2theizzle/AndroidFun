@@ -1,10 +1,12 @@
+package com.example.imightyjun.funapp;
+
 import java.util.Map;
 import com.google.gson.Gson;
 
 /**
  * Created by iMightyJun on 1/23/16.
  */
-public class HttpResponse {
+public class HttpBinResponse {
     public Map<String, String> args;
     public Map<String, String> headers;
     public String origin;
