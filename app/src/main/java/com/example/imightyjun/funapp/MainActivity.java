@@ -18,9 +18,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final HttpPayload payload = new HttpPayload("https://www.imightybigman.com/manga", "GET");
+
         final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("HttpResponse");
+
         Button button = (Button) findViewById(R.id.newButton);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,27 +37,13 @@ public class MainActivity extends AppCompatActivity {
                             alertDialog.setMessage(output);
                             alertDialog.show();
                         }
-                    }).execute(new HttpPayload());
+                    }).execute(payload);
                 }
                 catch(Exception ex)
                 {
                     ex.printStackTrace();
                 }
                 //alertDialog.setMessage(response);
-
-            }
-        });
-
-        Button mangaButton = (Button) findViewById(R.id.mangaBtn);
-        mangaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    new MangaParser().execute();
-                }
-                catch(Exception ex){
-                    ex.printStackTrace();
-                }
 
             }
         });
