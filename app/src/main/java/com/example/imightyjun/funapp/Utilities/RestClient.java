@@ -1,6 +1,8 @@
-package com.example.imightyjun.funapp;
+package com.example.imightyjun.funapp.Utilities;
 
 import android.os.AsyncTask;
+
+import com.example.imightyjun.funapp.Models.HttpPayload;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -20,6 +22,7 @@ public class RestClient extends AsyncTask<HttpPayload, Void, String> {
     public RestClient(AsyncResponse delegate) {
         this.delegate = delegate;
     }
+
     public interface AsyncResponse {
         void processFinish(String output);
     }
@@ -78,6 +81,10 @@ public class RestClient extends AsyncTask<HttpPayload, Void, String> {
 
     public void Close() throws IOException {
         httpClient.getConnectionManager().shutdown();
+    }
+
+    private String returnResponse(String json){
+        return json;
     }
 
 

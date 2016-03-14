@@ -1,4 +1,4 @@
-package com.example.imightyjun.funapp;
+package com.example.imightyjun.funapp.Models;
 
 /**
  * Created by iMightyJun on 1/23/16.

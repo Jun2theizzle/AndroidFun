@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="mangaBtn" type="id">mangaBtn</item>
+    <item name="loadDataBtn" type="id">loadDataBtn</item>
+    <item name="mangaListHeader" type="id">managListHeader</item>
 </resources>
