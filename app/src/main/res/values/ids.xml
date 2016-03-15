@@ -2,4 +2,6 @@
 <resources>
     <item name="loadDataBtn" type="id">loadDataBtn</item>
     <item name="mangaListHeader" type="id">managListHeader</item>
+    <item name="MangaItemTitle" type="id">MangaItemTitle</item>
+    <item name="MangaItemChapterNumber" type="id">MangaItemChapterNumber</item>
 </resources>

@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.imightyjun.funapp.CustomAdapters.MangaListAdapter;
 import com.example.imightyjun.funapp.Models.HttpPayload;
 import com.example.imightyjun.funapp.Models.Manga;
 import com.example.imightyjun.funapp.Utilities.RestClient;
@@ -58,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void CreateListView(Manga[] mangas){
         ListView listView = (ListView)findViewById(R.id.mangalist);
-        ArrayAdapter<Manga> adapter = new ArrayAdapter<Manga>(this, android.R.layout.simple_list_item_1, android.R.id.text1, mangas);
+        MangaListAdapter adapter = new MangaListAdapter(this,R.layout.mangalist_item_row, mangas);
+        View header = (View)getLayoutInflater().inflate(R.layout.manga_list_header, null);
+        listView.addHeaderView(header);
         listView.setAdapter(adapter);
-
 
     }
 

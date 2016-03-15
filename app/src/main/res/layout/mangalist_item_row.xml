@@ -3,18 +3,20 @@
     android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <TextView
-        android:text="Bleach"
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/MangaItemTitle"
+            style="@style/MangaItemTitle"
+            />
+        <TextView
+            style="@style/MangaItemRow"
+            android:id="@+id/MangaItemChapterNumber"
+            />
+    </LinearLayout>
 
-        />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
 
 </LinearLayout>
