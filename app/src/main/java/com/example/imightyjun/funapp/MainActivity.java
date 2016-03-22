@@ -1,13 +1,18 @@
 package com.example.imightyjun.funapp;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
+import com.example.imightyjun.funapp.CustomAdapters.MangaExpandableListAdapter;
 import com.example.imightyjun.funapp.CustomAdapters.MangaListAdapter;
 import com.example.imightyjun.funapp.Models.HttpPayload;
 import com.example.imightyjun.funapp.Models.Manga;
@@ -58,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void CreateListView(Manga[] mangas){
-        ListView listView = (ListView)findViewById(R.id.mangalist);
-        MangaListAdapter adapter = new MangaListAdapter(this,R.layout.mangalist_item_row, mangas);
-        View header = (View)getLayoutInflater().inflate(R.layout.manga_list_header, null);
-        listView.addHeaderView(header);
-        listView.setAdapter(adapter);
+        ExpandableListView expandableListView = (ExpandableListView)findViewById(R.id.MangaExpandableList);
+        expandableListView.setClickable(true);
+        MangaExpandableListAdapter adapter = new MangaExpandableListAdapter(mangas);
+        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE), this);
+        expandableListView.setAdapter(adapter);
 
     }
 

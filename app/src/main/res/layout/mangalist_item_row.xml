@@ -12,10 +12,6 @@
             android:id="@+id/MangaItemTitle"
             style="@style/MangaItemTitle"
             />
-        <TextView
-            style="@style/MangaItemRow"
-            android:id="@+id/MangaItemChapterNumber"
-            />
     </LinearLayout>
 
 

@@ -7,10 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.imightyjun.funapp.Models.Manga;
 import com.example.imightyjun.funapp.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by iMightyJun on 3/12/16.
@@ -36,8 +39,7 @@ public class MangaListAdapter extends ArrayAdapter<Manga> {
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new MangaHolder();
             holder.mangaTitle = (TextView)row.findViewById(R.id.MangaItemTitle);
-            holder.mangaChapter = (TextView)row.findViewById(R.id.MangaItemChapterNumber);
-
+            holder.mangaChapters = (ListView)row.findViewById(R.id.MangaItemChapters);
             row.setTag(holder);
 
         }
@@ -45,15 +47,17 @@ public class MangaListAdapter extends ArrayAdapter<Manga> {
             holder = (MangaHolder)row.getTag();
         }
         Manga manga = mangas[position];
+        ArrayList<String> mangaChapters = manga.GetChapters();
         holder.mangaTitle.setText(manga.Name);
-        holder.mangaChapter.setText(manga.Name + " " + manga.Chapters[0].ChapterNumber);
-
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                context, android.R.layout.simple_list_item_1, android.R.id.text1, (String[])mangaChapters.toArray());
+        holder.mangaChapters.setAdapter(adapter);
         return row;
     }
 
     static class MangaHolder{
         TextView mangaTitle;
-        TextView mangaChapter;
+        ListView mangaChapters;
     }
 
 }

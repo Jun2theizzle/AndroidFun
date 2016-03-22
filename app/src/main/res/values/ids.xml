@@ -4,4 +4,7 @@
     <item name="mangaListHeader" type="id">managListHeader</item>
     <item name="MangaItemTitle" type="id">MangaItemTitle</item>
     <item name="MangaItemChapterNumber" type="id">MangaItemChapterNumber</item>
+    <item name="MangaItemChapters" type="id">MangaItemChapters</item>
+    <item name="MangaExpandableList" type="id">MangaExpandableList</item>
+
 </resources>
