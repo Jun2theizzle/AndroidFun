@@ -1,6 +1,8 @@
 package com.example.imightyjun.funapp.CustomAdapters;
 
 import android.app.Activity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +22,10 @@ public class MangaExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Activity activity;
     private LayoutInflater inflater;
-    private ArrayList<String> parentItems, child;
-    private ArrayList<Object> childItems;
+    private Manga[] mangas;
 
     public MangaExpandableListAdapter(Manga[] mangas){
-        parentItems = new ArrayList<String>();
-        childItems = new ArrayList<Object>();
-        for(Manga m : mangas){
-            parentItems.add(m.Name);
-            childItems.add(m.GetChapters());
-        }
+        this.mangas = mangas;
     }
 
     public void setInflater(LayoutInflater inflater, Activity activity){
@@ -39,12 +35,13 @@ public class MangaExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return parentItems.size();
+
+        return mangas.length;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return ((ArrayList<String>) childItems.get(groupPosition)).size();
+        return mangas[groupPosition].Chapters.length;
     }
 
     @Override
@@ -82,19 +79,28 @@ public class MangaExpandableListAdapter extends BaseExpandableListAdapter {
         if(convertView == null){
             convertView = inflater.inflate(R.layout.mangalist_chapters, null);
         }
-        ((TextView) convertView).setText(parentItems.get(groupPosition));
+        ViewGroup viewGroup = ((ViewGroup) convertView);
+        TextView textView = (TextView)viewGroup.getChildAt(0);
+        textView.setText(mangas[groupPosition].Name);
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        child = (ArrayList<String>) childItems.get(groupPosition);
         TextView textView = null;
         if(convertView == null){
             convertView = inflater.inflate(R.layout.mangalist_item_row, null);
         }
+        String mangaTitle = mangas[groupPosition].Name;
+        String mangaChapter = mangas[groupPosition].Chapters[childPosition].ChapterNumber;
+        String mangaLink = mangas[groupPosition].Chapters[childPosition].Link;
+
         textView = (TextView) convertView.findViewById(R.id.MangaItemTitle);
-        textView.setText(child.get(childPosition));
+
+        String htmlLink = "<a href=\"" + mangaLink + "\">" + mangaTitle + " " + mangaChapter +"</a>";
+        textView.setText(Html.fromHtml(htmlLink));
+        textView.setClickable(true);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
         return convertView;
     }
 

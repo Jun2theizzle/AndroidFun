@@ -1,8 +1,12 @@
-
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <TextView
         android:id="@+id/MangaItemChapters"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         style="@style/MangaItemRow"
-        />
+        android:layout_width="fill_parent"
+        android:layout_height="200dp" />
+
+</LinearLayout>
+
 
