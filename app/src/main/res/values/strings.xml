@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">FunApp</string>
-    <string name="loadDataBtnText">Load Data</string>
+    <string name="viewMangaBtnText">View Manga</string>
     <string name="mangaListText">Manga List</string>
+    <string name="title_activity_manga_read">MangaRead</string>
 </resources>

@@ -11,6 +11,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 
 
 /**
@@ -46,14 +47,16 @@ public class RestClient extends AsyncTask<HttpPayload, Void, String> {
     }
 
 
-    public String ExecuteRequest(HttpPayload params) throws Exception{
+    public String ExecuteRequest(HttpPayload payload) throws Exception{
         try {
             httpClient = new DefaultHttpClient();
             HttpResponse response;
-            switch (params.method) {
+            switch (payload.method) {
                 case "GET" :
-                    HttpGet httpGet = new HttpGet(params.url);
-                    httpGet.addHeader("accept", "text/html");
+                    HttpGet httpGet = new HttpGet(payload.url);
+                    for(Map.Entry<String, String> entry: payload.headers.entrySet()){
+                        httpGet.addHeader(entry.getKey(), entry.getValue());
+                    }
                     response = httpClient.execute(httpGet);
                     break;
                 default:

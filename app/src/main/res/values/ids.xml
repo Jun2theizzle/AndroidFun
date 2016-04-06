@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="loadDataBtn" type="id">loadDataBtn</item>
+    <item name="viewMangaBtn" type="id">viewMangaBtn</item>
     <item name="mangaListHeader" type="id">managListHeader</item>
     <item name="MangaItemTitle" type="id">MangaItemTitle</item>
     <item name="MangaItemChapterNumber" type="id">MangaItemChapterNumber</item>
     <item name="MangaItemChapters" type="id">MangaItemChapters</item>
     <item name="MangaExpandableList" type="id">MangaExpandableList</item>
+    <item name="MangaPage" type="id">MangaPage</item>
 
 </resources>

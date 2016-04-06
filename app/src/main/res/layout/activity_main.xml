@@ -13,8 +13,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/loadDataBtnText"
-        android:id="@+id/loadDataBtn"/>
+        android:text="@string/viewMangaBtnText"
+        android:id="@+id/viewMangaBtn"/>
 
    <ExpandableListView
        android:id="@+id/MangaExpandableList"

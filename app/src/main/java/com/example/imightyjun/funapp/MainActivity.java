@@ -1,19 +1,16 @@
 package com.example.imightyjun.funapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 
 import com.example.imightyjun.funapp.CustomAdapters.MangaExpandableListAdapter;
-import com.example.imightyjun.funapp.CustomAdapters.MangaListAdapter;
 import com.example.imightyjun.funapp.Models.HttpPayload;
 import com.example.imightyjun.funapp.Models.Manga;
 import com.example.imightyjun.funapp.Utilities.RestClient;
@@ -37,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void LoadMangaData(){
         final HttpPayload payload = new HttpPayload("https://www.imightybigman.com/manga", "GET");
+        payload.headers.put("accept", "application/json");
         final Gson gson = new GsonBuilder().create();
         try {
             new RestClient(new RestClient.AsyncResponse() {
@@ -54,12 +52,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void SetUpLoadDataBtn(){
-        Button button = (Button) findViewById(R.id.loadDataBtn);
+        Button button = (Button) findViewById(R.id.viewMangaBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OpenMangaRead();
             }
         });
+    }
+
+    private void OpenMangaRead(){
+        Intent intent = new Intent(this, MangaReadActivity.class);
+        startActivity(intent);
     }
 
     private void CreateListView(Manga[] mangas){
